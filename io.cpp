@@ -11,11 +11,12 @@ std::vector<std::string> openFile(std::string textfile)
 
     if (filename.is_open())
     {
-        while (std::getline(filename, team))
+        do
         {
             filename >> team;
             teams.push_back(team);
         }
+        while (std::getline(filename, team));
         filename.close();
     }
 
