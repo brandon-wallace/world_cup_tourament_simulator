@@ -28,11 +28,9 @@
 
 # Executables
 main
-calculator
 *.exe
 *.out
 *.app
 
 # Text files
-*.txt
 .gdb_history
