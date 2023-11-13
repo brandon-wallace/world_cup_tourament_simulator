@@ -1,6 +1,6 @@
 # World Cup Tournament Simulator
 
-![screenshot_1](screenshot1.png)
+![screenshot_1](screenshot1.jpg)
 
 ### Clone
 
