@@ -1,6 +1,6 @@
 CXX = g++
 # CXXFLAGS = -Wall -Weffc++ -Wextra -Wsign-conversion -Werror -pipe -O2 -DNDEBUG 
-CXXFLAGS = -Wall -Weffc++ -Wextra -Werror -pipe -O2 -DNDEBUG 
+CXXFLAGS = -std=c++17 -Wall -Weffc++ -Wextra -Werror -pipe -O2 -DNDEBUG 
 LDLIBS = 
 RM = rm -f
 
