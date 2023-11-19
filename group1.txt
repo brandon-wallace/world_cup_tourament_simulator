@@ -1,16 +1,16 @@
-Uruguay         
-Portugal        
-France          
-Argentina       
-Brazil          
-Mexico          
-Japan           
-Belguim         
-Korea           
-Senegal         
-Iceland         
-Peru            
-Morocco         
-Iran            
-Australia       
-Germany         
+Uruguay         5.0
+Portugal        5.1
+France          6.0
+Argentina       13.1
+Brazil          19.0
+Mexico          8.9
+Japan           2.3
+Belguim         1.9
+Korea           3.3
+Senegal         7.2
+Iceland         1.1
+Peru            5.8
+Morocco         7.8
+Iran            6.9
+Australia       3.2
+Germany         7.1

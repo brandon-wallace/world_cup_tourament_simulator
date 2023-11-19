@@ -1,16 +1,16 @@
-Spain           
-Russia          
-Croatia         
-Denmark         
-Sweded          
-Switzerland     
-Colombia        
-England         
-Panama          
-Nigeria         
-Ghana           
-Poland          
-Tunisia         
-Costa_Rica      
-Saudi_Arabia    
-Belgium         
+Spain           7.0
+Russia          6.1
+Croatia         5.0
+Denmark         2.1
+Sweded          5.9
+Switzerland     5.9
+Colombia        8.3
+England         6.9
+Panama          2.3
+Nigeria         7.2
+Ghana           8.1
+Poland          5.8
+Tunisia         7.8
+Costa_Rica      7.9
+Saudi_Arabia    3.8
+Belgium         2.1
