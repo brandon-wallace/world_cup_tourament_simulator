@@ -1,39 +1,57 @@
 #include <iostream>
 #include <random>
+#include <map>
 #include "io.h"
 
-// randInt selects a random number from a range
-int randInt()
+int winnerIndex(const std::vector<double> weights)
 {
-    std::random_device rd;
-    std::seed_seq ss{ rd(), rd(), rd(), rd(), rd(), rd(), rd(), rd() };
-    std::mt19937 mt{ ss };
-    std::uniform_int_distribution<int> range{ 1, 2 };
+    double sum = {0.0};
+    for (const auto& w: weights)
+        sum += w;
 
-    return range(mt);
+    double r{ static_cast<float>(rand()) / RAND_MAX * sum };
+    for (size_t i = 0; i < weights.size(); i++)
+    {
+        r -= weights[i];
+        if (r < 0) 
+        {
+            return static_cast<int>(i);
+        }
+    }
+
+    std::cout << " weights.size() - 1: " << static_cast<int>(weights.size() - 1) << '\n';
+    return static_cast<int>(weights.size() - 1);
 }
 
-// selectWinner selects the winner of the match
-std::string selectWinner(std::string team1, std::string team2)
+std::map<std::string, double> playMatch(std::map<std::string, double> teamMap, int count)
 {
-    std::vector<std::string> teams{ team1, team2 };
-    std::random_device rd; 
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<> distr(0, teams.size() - 1);
+    std::vector<std::string> competitors;
+    auto it = teamMap.begin();
+    std::map<std::string, double> winners;
 
-    return teams[distr(mt)];
-}
-
-// playMatch
-std::vector<std::string> playMatch(std::vector<std::string> teams, int count)
-{
-    std::vector<std::string> winners;
     for (int i = 0; i < count; i+=2)
     {
-        std::cout << " " << teams[i] << " -- VS -- " << teams[i+1] << '\n';
-        std::string winner{ selectWinner(teams[i], teams[i+1]) };
-        winners.push_back(winner);
+        std::string t1 = it->first;
+        double w1 = it->second;
+        it++;
+        std::string t2 = it->first;
+        double w2 = it->second;
+        ++it;
+        std::cout << " " << t1 << " VS " << t2 << '\n';
+        std::vector<double> match{w1, w2};
+        int index{ winnerIndex(match) };
+        if (index == 0) 
+        {
+            std::cout << " ---- Winner: " << t1 << '\n';
+            winners.insert(std::make_pair(t1, w1));
+        }
+        else
+        {
+            std::cout << " ---- Winner: " << t2 << '\n';
+            winners.insert(std::make_pair(t2, w2));
+        }
     }
+
     return winners;
 }
 
@@ -48,47 +66,43 @@ void printWinner(std::vector<std::string> winners)
 
 int main()
 {
-    std::vector<std::string> group1{ openFile("group1.txt") };
-    std::vector<std::string> group2{ openFile("group2.txt") };
+    std::map<std::string, double> group1 = openFile("group1.txt");
+    std::map<std::string, double> group2 = openFile("group2.txt");
 
     std::cout << '\n';
     std::cout << " Round Of Sixteen:" << '\n';
-    std::vector<std::string> playMatchOfSixteen1{ playMatch(group1, 16) };
-    std::vector<std::string> playMatchOfSixteen2{ playMatch(group2, 16) };
-
+    std::map<std::string, double> roundOfSixteen1{ playMatch(group1, 16) };
+    std::map<std::string, double> roundOfSixteen2{ playMatch(group2, 16) };
     std::cout << '\n';
-    printWinner(playMatchOfSixteen1);
-    
+
     std::cout << " Semi Final:" << '\n';
-    std::vector<std::string> semiFinal1{ playMatch(playMatchOfSixteen1, 8) };
-    std::vector<std::string> semiFinal2{ playMatch(playMatchOfSixteen2, 8) };
-
+    std::map<std::string, double> semiFinal1{ playMatch(roundOfSixteen1, 8) };
+    std::map<std::string, double> semiFinal2{ playMatch(roundOfSixteen2, 8) };
     std::cout << '\n';
-    printWinner(semiFinal1);
-    printWinner(semiFinal2);
 
     std::cout << " Quarter Final:" << '\n';
-    std::vector<std::string> quarterFinal1{ playMatch(semiFinal1, 4) };
-    std::vector<std::string> quarterFinal2{ playMatch(semiFinal2, 4) };
-
+    std::map<std::string, double> quarterFinal1{ playMatch(semiFinal1, 4) };
+    std::map<std::string, double> quarterFinal2{ playMatch(semiFinal2, 4) };
     std::cout << '\n';
-    printWinner(quarterFinal1);
-    printWinner(quarterFinal2);
 
     std::cout << " Finals:" << '\n';
-    std::vector<std::string> final1{ playMatch(quarterFinal1, 2) };
-    std::vector<std::string> final2{ playMatch(quarterFinal2, 2) };
-
+    std::map<std::string, double> final1{ playMatch(quarterFinal1, 2) };
+    std::map<std::string, double> final2{ playMatch(quarterFinal2, 2) };
     std::cout << '\n';
-    printWinner(final1);
-    printWinner(final2);
+
+    std::map<std::string, double> champions;
+    auto it = final1.begin();
+    std::cout << " " << it->first << '\n';
+    champions.insert(std::make_pair(it->first, it->second));
+
+    it = final2.begin();
+    std::cout << " " << it->first << '\n';
+    std::cout << '\n';
+    champions.insert(std::make_pair(it->first, it->second));
 
     std::cout << " World Champion:" << '\n';
-    std::string champ1 = final1[0];
-    std::string champ2 = final2[0];
-
-    std::string champion{ selectWinner(champ1, champ2) };
-    std::cout << " " << champion << '\n';
+    std::map<std::string, double> champion{ playMatch(champions, 1) };
+    std::cout << '\n';
 
     return 0;
 }

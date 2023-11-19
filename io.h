@@ -3,7 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
-std::vector<std::string> openFile(std::string);
+std::map<std::string, double> openFile(std::string);
 
 #endif

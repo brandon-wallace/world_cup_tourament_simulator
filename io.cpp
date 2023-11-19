@@ -1,24 +1,27 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 
 // openFile opens a text file and stores the contents in a vector (arrary)
-std::vector<std::string> openFile(std::string textfile)
+std::map<std::string, double> openFile(std::string textfile)
 {
     std::ifstream filename (textfile);
-    std::vector<std::string> teams{};
-    std::string team{};
+    std::map<std::string, double> teamData;
+    std::string team = "";
+    double weight = 0.0;
 
     if (filename.is_open())
     {
         do
         {
-            filename >> team;
-            teams.push_back(team);
+            filename >> team >> weight;
+            // std::cout << team << " " << weight << '\n';
+            teamData.insert(std::make_pair(team, weight));
         }
-        while (std::getline(filename, team));
-        filename.close();
+        while (filename);
     }
+    filename.close();
 
-    return teams;
+    return teamData;
 }
