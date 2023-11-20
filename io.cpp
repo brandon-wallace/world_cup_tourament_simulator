@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 
-// openFile opens a text file and stores the contents in a vector (arrary)
+// openFile opens a text file and stores the contents in a vector (array)
 std::map<std::string, double> openFile(std::string textfile)
 {
     std::ifstream filename (textfile);
@@ -16,7 +16,6 @@ std::map<std::string, double> openFile(std::string textfile)
         do
         {
             filename >> team >> weight;
-            // std::cout << team << " " << weight << '\n';
             teamData.insert(std::make_pair(team, weight));
         }
         while (filename);

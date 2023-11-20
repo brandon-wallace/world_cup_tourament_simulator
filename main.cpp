@@ -19,15 +19,14 @@ int winnerIndex(const std::vector<double> weights)
         }
     }
 
-    std::cout << " weights.size() - 1: " << static_cast<int>(weights.size() - 1) << '\n';
     return static_cast<int>(weights.size() - 1);
 }
 
-std::map<std::string, double> playMatch(std::map<std::string, double> teamMap, int count)
+// playMatch iterates through a map of teams and weights, selects a random winner, and returns a map
+std::map<std::string, double> playMatch(const std::map<std::string, double> teamMap, int count)
 {
-    std::vector<std::string> competitors;
-    auto it = teamMap.begin();
     std::map<std::string, double> winners;
+    auto it = teamMap.begin();
 
     for (int i = 0; i < count; i+=2)
     {
@@ -37,9 +36,9 @@ std::map<std::string, double> playMatch(std::map<std::string, double> teamMap, i
         std::string t2 = it->first;
         double w2 = it->second;
         ++it;
-        std::cout << " " << t1 << " VS " << t2 << '\n';
+        std::cout << " " << t1 << " vs " << t2 << '\n';
         std::vector<double> match{w1, w2};
-        int index{ winnerIndex(match) };
+        int index = { winnerIndex(match) };
         if (index == 0) 
         {
             std::cout << " ---- Winner: " << t1 << '\n';
@@ -56,7 +55,7 @@ std::map<std::string, double> playMatch(std::map<std::string, double> teamMap, i
 }
 
 // printWinner prints elements from the winners vector
-void printWinner(std::vector<std::string> winners)
+void printWinner(const std::vector<std::string> winners)
 {
     std::cout << " Winners:" << '\n';
     for (auto& team: winners)
@@ -75,12 +74,12 @@ int main()
     std::map<std::string, double> roundOfSixteen2{ playMatch(group2, 16) };
     std::cout << '\n';
 
-    std::cout << " Semi Final:" << '\n';
+    std::cout << " Semi Finals:" << '\n';
     std::map<std::string, double> semiFinal1{ playMatch(roundOfSixteen1, 8) };
     std::map<std::string, double> semiFinal2{ playMatch(roundOfSixteen2, 8) };
     std::cout << '\n';
 
-    std::cout << " Quarter Final:" << '\n';
+    std::cout << " Quarter Finals:" << '\n';
     std::map<std::string, double> quarterFinal1{ playMatch(semiFinal1, 4) };
     std::map<std::string, double> quarterFinal2{ playMatch(semiFinal2, 4) };
     std::cout << '\n';
@@ -100,7 +99,7 @@ int main()
     std::cout << '\n';
     champions.insert(std::make_pair(it->first, it->second));
 
-    std::cout << " World Champion:" << '\n';
+    std::cout << " World Championship:" << '\n';
     std::map<std::string, double> champion{ playMatch(champions, 1) };
     std::cout << '\n';
 
