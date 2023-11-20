@@ -3,13 +3,15 @@
 #include <map>
 #include "io.h"
 
+// winnerIndex returns the index of the weight in the vector
 int winnerIndex(const std::vector<double> weights)
 {
     double sum = {0.0};
     for (const auto& w: weights)
         sum += w;
 
-    double r{ static_cast<float>(rand()) / RAND_MAX * sum };
+    srand(static_cast<unsigned>(time(nullptr)));
+    double r{ static_cast<double>(rand()) / RAND_MAX * sum };
     for (size_t i = 0; i < weights.size(); i++)
     {
         r -= weights[i];
