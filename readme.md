@@ -2,6 +2,8 @@
 
 ![screenshot_1](screenshot1.jpg)
 
+![screenshot_2](screenshot2.png)
+
 ### Clone
 
 ```
