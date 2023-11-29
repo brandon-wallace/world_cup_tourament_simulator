@@ -1,7 +1,25 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <vector>
 #include <map>
+#include <string>
+
+void printHeader()
+{
+    std::cout << 
+R"(
+ ┬ ┬┌─┐┬─┐┬  ┌┬┐  ┌─┐┬ ┬┌─┐      
+ ││││ │├┬┘│   ││  │  │ │├─┘      
+ └┴┘└─┘┴└─┴─┘─┴┘  └─┘└─┘┴        
+ ┌┬┐┌─┐┬ ┬┬─┐┌┐┌┌─┐┌┬┐┌─┐┌┐┌┌┬┐  
+  │ │ ││ │├┬┘│││├─┤│││├┤ │││ │   
+  ┴ └─┘└─┘┴└─┘└┘┴ ┴┴ ┴└─┘┘└┘ ┴   
+ ┌─┐┬┌┬┐┬ ┬┬  ┌─┐┌┬┐┌─┐┬─┐       
+ └─┐│││││ ││  ├─┤ │ │ │├┬┘       
+ └─┘┴┴ ┴└─┘┴─┘┴ ┴ ┴ └─┘┴└─
+ )";
+}
 
 // openFile opens a text file and stores the contents in a vector (array)
 std::map<std::string, double> openFile(std::string textfile)
