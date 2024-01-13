@@ -87,17 +87,55 @@ int main()
     std::map<std::string, double> final2{ playMatch(quarterFinal2, 2) };
     std::cout << '\n';
 
+    std::vector<std::string> finalFour = {};
+    std::string t1 = {};
+    std::string t2 = {};
+    std::string t3 = {};
+    std::string t4 = {};
+
+    std::cout << '\n';
+
     std::map<std::string, double> champions;
     auto it = final1.begin();
-    std::cout << " " << it->first << '\n';
+    t1 = it->first;
     champions.insert(std::make_pair(it->first, it->second));
-
     it = final2.begin();
-    std::cout << " " << it->first << '\n';
-    std::cout << '\n';
+    t2 = it->first;
+
+    std::vector<std::string> thirdPlace = {};
+    auto it3 = quarterFinal1.begin();
+    if (it3->first != t1)
+    {
+        t3 = it3->first;
+        thirdPlace.push_back(t3);
+    }
+    else
+    {
+        it3++;
+        t3 = it3->first;
+        thirdPlace.push_back(t3);
+    }
+
+    auto it4 = quarterFinal2.begin();
+    if (it4->first != t2)
+    {
+        t4 = it4->first;
+        thirdPlace.push_back(t4);
+    }
+    else
+    {
+        it4++;
+        t4 = it4->first;
+        thirdPlace.push_back(t4);
+    }
+
+    srand(static_cast<unsigned>(time(nullptr)));
+    int index = rand() % 2;
+    std::cout << " THIRD PLACE:" << '\n' << " " << thirdPlace[index] << '\n';
+
     champions.insert(std::make_pair(it->first, it->second));
 
-    std::cout << " WORLD CHAMPIONSHIP:" << '\n';
+    std::cout << '\n' << " WORLD CHAMPIONSHIP:" << '\n';
     std::map<std::string, double> champion{ playMatch(champions, 1) };
     std::cout << '\n';
 
