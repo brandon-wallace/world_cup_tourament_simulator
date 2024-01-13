@@ -131,13 +131,15 @@ int main()
 
     srand(static_cast<unsigned>(time(nullptr)));
     int index = rand() % 2;
-    std::cout << " THIRD PLACE:" << '\n' << " " << thirdPlace[index] << '\n';
 
     champions.insert(std::make_pair(it->first, it->second));
 
-    std::cout << '\n' << " WORLD CHAMPIONSHIP:" << '\n';
+    std::cout << " WORLD CHAMPIONSHIP:" << '\n';
     std::map<std::string, double> champion{ playMatch(champions, 1) };
     std::cout << '\n';
+    std::cout << " THIRD PLACE:" << '\n' << " " << thirdPlace[index] << '\n' << '\n';
+    std::cout << " SECOND PLACE:" << '\n' << " " << t2 << '\n' << '\n';
+    std::cout << " FIRST PLACE:" << '\n' << " " << t1 << '\n' << '\n';
 
     return 0;
 }
