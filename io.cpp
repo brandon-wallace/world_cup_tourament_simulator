@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 
+// printHeader displays the name of the tournament with ascii characters
 void printHeader()
 {
     std::cout << 

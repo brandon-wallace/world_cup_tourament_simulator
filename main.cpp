@@ -60,6 +60,7 @@ std::map<std::string, double> playMatch(const std::map<std::string, double> team
     return winners;
 }
 
+// The main function for running a simulated world championship.
 int main()
 {
     printHeader();
